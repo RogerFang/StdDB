@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="StdDB:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="StdDB.war">
+      <element id="artifact" artifact-name="StdDB:war exploded" />
+    </root>
+  </artifact>
+</component>

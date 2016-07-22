@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.whu.irlab.dao.mysql.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="edu.whu.irlab.model.mysql.Answer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="user_tag" property="userTag" jdbcType="VARCHAR" />
+    <result column="vote_num" property="voteNum" jdbcType="VARCHAR" />
+    <result column="comment_num" property="commentNum" jdbcType="VARCHAR" />
+    <result column="thanks_num" property="thanksNum" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="edu.whu.irlab.model.mysql.Answer" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, question_id, username, user_tag, vote_num, comment_num, thanks_num, date
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from answer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from answer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="edu.whu.irlab.model.mysql.Answer" >
+    insert into answer (id, question_id, username, 
+      user_tag, vote_num, comment_num, 
+      thanks_num, date, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{userTag,jdbcType=VARCHAR}, #{voteNum,jdbcType=VARCHAR}, #{commentNum,jdbcType=VARCHAR}, 
+      #{thanksNum,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="edu.whu.irlab.model.mysql.Answer" >
+    insert into answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="userTag != null" >
+        user_tag,
+      </if>
+      <if test="voteNum != null" >
+        vote_num,
+      </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="thanksNum != null" >
+        thanks_num,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null" >
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userTag != null" >
+        #{userTag,jdbcType=VARCHAR},
+      </if>
+      <if test="voteNum != null" >
+        #{voteNum,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="thanksNum != null" >
+        #{thanksNum,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.whu.irlab.model.mysql.Answer" >
+    update answer
+    <set >
+      <if test="questionId != null" >
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userTag != null" >
+        user_tag = #{userTag,jdbcType=VARCHAR},
+      </if>
+      <if test="voteNum != null" >
+        vote_num = #{voteNum,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="thanksNum != null" >
+        thanks_num = #{thanksNum,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="edu.whu.irlab.model.mysql.Answer" >
+    update answer
+    set question_id = #{questionId,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      user_tag = #{userTag,jdbcType=VARCHAR},
+      vote_num = #{voteNum,jdbcType=VARCHAR},
+      comment_num = #{commentNum,jdbcType=VARCHAR},
+      thanks_num = #{thanksNum,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.whu.irlab.model.mysql.Answer" >
+    update answer
+    set question_id = #{questionId,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      user_tag = #{userTag,jdbcType=VARCHAR},
+      vote_num = #{voteNum,jdbcType=VARCHAR},
+      comment_num = #{commentNum,jdbcType=VARCHAR},
+      thanks_num = #{thanksNum,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
